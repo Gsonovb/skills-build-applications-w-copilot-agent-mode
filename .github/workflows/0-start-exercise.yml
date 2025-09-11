@@ -100,12 +100,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Get response templates
-        uses: actions/checkout@v4
-        with:
-          repository: skills/response-templates
-          path: skills-response-templates
-
       - name: Configure Git user
         run: |
           git config user.name github-actions[bot]
@@ -115,7 +109,7 @@ jobs:
         id: build-issue-description
         uses: skills/action-text-variables@v1
         with:
-          template-file: skills-response-templates/step-feedback/welcome.md
+          template-file: .github/templates/step-feedback/welcome.md
           template-vars: |
             title=${{ env.EXERCISE_NAME }}
             login=${{ github.actor }}
@@ -143,12 +137,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Get response templates
-        uses: actions/checkout@v4
-        with:
-          repository: skills/response-templates
-          path: skills-response-templates
-
       - name: Configure Git user
         run: |
           git config user.name github-actions[bot]
@@ -174,7 +162,7 @@ jobs:
       - name: Create comment - watching for progress
         run: |
           gh issue comment "$ISSUE_URL" \
-            --body-file "skills-response-templates/step-feedback/watching-for-progress.md"
+            --body-file ".github/templates/step-feedback/watching-for-progress.md"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

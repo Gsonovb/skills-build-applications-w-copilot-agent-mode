@@ -31,11 +31,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Get response templates
-        uses: actions/checkout@v4
-        with:
-          repository: skills/response-templates
-          path: skills-response-templates
 
       # START: Check practical exercise
 
@@ -46,7 +41,7 @@ jobs:
       - name: Create comment - step finished - final review next
         run: |
           gh issue comment "$ISSUE_URL" \
-            --body-file skills-response-templates/step-feedback/lesson-review.md
+            --body-file .github/templates/step-feedback/lesson-review.md
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -61,11 +56,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Get response templates
-        uses: actions/checkout@v4
-        with:
-          repository: skills/response-templates
-          path: skills-response-templates
 
       - name: Create comment - add step content
         run: |
@@ -87,11 +77,6 @@ jobs:
         with:
           ref: main
 
-      - name: Get response templates
-        uses: actions/checkout@v4
-        with:
-          repository: skills/response-templates
-          path: skills-response-templates
 
       - name: Configure Git user
         run: |
@@ -102,7 +87,7 @@ jobs:
         id: build-message-congratulations
         uses: skills/action-text-variables@v1
         with:
-          template-file: skills-response-templates/readme/congratulations.md
+          template-file: .github/templates/readme/congratulations.md
           template-vars: |
             login=${{ github.actor }}
 
@@ -124,7 +109,7 @@ jobs:
         id: build-finish-message
         uses: skills/action-text-variables@v1
         with:
-          template-file: skills-response-templates/step-feedback/lesson-finished.md
+          template-file: .github/templates/step-feedback/lesson-finished.md
           template-vars: |
             login=${{ github.actor }}
             repo_full_name=${{ github.repository }}
